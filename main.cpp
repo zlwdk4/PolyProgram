@@ -3,6 +3,7 @@
 #include "Term.h"
 #include <sstream>
 //DID IT WORK??????????!!!!!!!!!
+//does it work
 using namespace std;
 
 void storeCur(string curNums, string curExp, char theLetter, bool isNegative, bool expNeg, list<Term> &theList) {
