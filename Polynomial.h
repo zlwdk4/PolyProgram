@@ -9,6 +9,7 @@ class Polynomial
 
 public:
 	//operator +
+	//operator =
 	void simplify();
 	void addTerm(Term termToAdd);
 	//operator <<
