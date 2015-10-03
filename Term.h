@@ -1,5 +1,5 @@
 #pragma once
-//please work
+
 class Term
 {
 public:

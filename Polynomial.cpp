@@ -1,5 +1,4 @@
 #include "Polynomial.h"
-#include <map>
 
 //adds a term to the polynomial
 void Polynomial::addTerm(Term termToAdd)
