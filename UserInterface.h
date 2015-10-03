@@ -7,9 +7,8 @@ using namespace std;
 class UserInterface
 {
 public:
+	//Both functions are implemented except for the overloaded input and output stream operators
 	void displayMenu();
-	char getUserInput();
-	bool respondToUserInput(char input);
 	//Polynomial getPoly();
 private:
 
