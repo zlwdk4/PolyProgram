@@ -20,7 +20,7 @@ public:
 	//operator <<
 	friend ostream& operator <<(ostream &cout,  Polynomial& P);
 	//opeartor >>
-	//void operator >>(string theString);
+	friend istream& operator >>(istream &cin, Polynomial& P);
 private:
 	list<Term> polyList;
 };
