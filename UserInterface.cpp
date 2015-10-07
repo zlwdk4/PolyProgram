@@ -1,5 +1,14 @@
 #include "UserInterface.h"
 
+
+
+Polynomial getPoly()
+{
+	Polynomial input;
+	cin >> input;
+	return input;
+}
+
 void UserInterface::displayMenu()
 {
 	char input;
@@ -14,24 +23,20 @@ void UserInterface::displayMenu()
 		{
 			Polynomial polyInput;
 			cout << "Please enter the polynomial" << endl;
-			//cin >> polyInput;
-			//cout << polyInput;
+			cin >> polyInput;
+			cout << polyInput;
 		}
 
 		if (input == '2')
 		{
 			cout << "Please enter the first polynomial" << endl;
-			//Polynomial poly1 = getPoly();
+			Polynomial poly1 = getPoly();
 			cout << "Now enter the second polynomial" << endl;
-			//Polynomial poly2 = getPoly();
-			//cout << (poly1 + poly2) << endl;
+			Polynomial poly2 = getPoly();
+			Polynomial finalPoly;
+			finalPoly = poly1 + poly2;
+			cout << finalPoly << endl;
 		}
 	} while (input != '3');
 }
 
-
-//Polynomial getPoly()
-//{
-//	Polynomial input;
-//	cin >> input;
-//}

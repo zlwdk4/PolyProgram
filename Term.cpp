@@ -19,13 +19,13 @@ Term::Term(int coe, int exp, char theLetter) {
 
 }
 
-
-Term::Term(int coe, int exp, char theLetter) {
-	coefficient = coe;
-	exponent = exp;
-	letter = theLetter;
-
-}
+//
+//Term::Term(int coe, int exp, char theLetter) {
+//	coefficient = coe;
+//	exponent = exp;
+//	letter = theLetter;
+//
+//}
 
 
 bool Term::operator < (Term rhs)

@@ -13,7 +13,7 @@ public:
 	//operator +
 	//const?
 
-	void  operator +(Polynomial rhs);
+	Polynomial  operator +(Polynomial rhs);
 	//operator =
 	void simplify();
 	void addTerm(Term termToAdd);

@@ -4,6 +4,40 @@
 
 using namespace std;
 //adds a term to the polynomial
+
+struct VALUES {
+
+
+	string curNums = "0";
+	string curExp = "1";
+	char theLetter = ' ';
+	bool letterMade = false;
+	char ch = ' ';
+	bool completedCoe = false;
+	bool completedExp = false;
+	bool startExp = false;
+	bool isNegative = false;
+	bool inParenth = false;
+	bool expNeg = false;
+
+
+};
+
+void resetVals(VALUES &vals) {
+	vals.curNums = "0";
+	vals.curExp = "1";
+	vals.theLetter = ' ';
+	vals.letterMade = false;
+	vals.ch = ' ';
+	vals.completedCoe = false;
+	vals.completedExp = false;
+	vals.startExp = false;
+	vals.isNegative = false;
+	vals.inParenth = false;
+	vals.expNeg = false;
+}
+
+
 void Polynomial::addTerm(Term termToAdd)
 {
 	polyList.push_back(termToAdd);
@@ -62,19 +96,27 @@ void Polynomial::simplify()
 
 }
 
-void Polynomial::operator +(Polynomial rhs) {
+//make const???????
+Polynomial Polynomial::operator +(Polynomial rhs) {
+	Polynomial finalPoly;
+	finalPoly.polyList = polyList;
 		if (rhs.polyList.size() < 1) {
-			//cout << "there are no items in the second polynomial" << endl;
+			cout << "there are no items in the second polynomial" << endl;
 		}
 		else {
 			list<Term>::iterator iter = rhs.polyList.begin();
 			for (iter; iter != rhs.polyList.end(); iter++) {
-				addTerm(*iter);
+				finalPoly.addTerm(*iter);
 			}
-			simplify();
+	//		finalPoly.simplify();
 		}
 		
+		return finalPoly;
 }
+
+
+
+
 
 	//const issue passing P
 ostream& operator <<(ostream& cout,  Polynomial& P){
@@ -113,61 +155,14 @@ ostream& operator <<(ostream& cout,  Polynomial& P){
 			
 		}
 
+		cout << endl;
 		return cout;
 	}
 
 
-struct VALUES {
 
 
-		string curNums = "0";
-		string curExp = "1";
-		char theLetter = ' ';
-		bool letterMade = false;
-		char ch = ' ';
-		bool completedCoe = false;
-		bool completedExp = false;
-		bool startExp = false;
-		bool isNegative = false;
-		bool inParenth = false;
-		bool expNeg = false;
-
-
-	};
-
-struct VALUES {
-
-
-		string curNums = "0";
-		string curExp = "1";
-		char theLetter = ' ';
-		bool letterMade = false;
-		char ch = ' ';
-		bool completedCoe = false;
-		bool completedExp = false;
-		bool startExp = false;
-		bool isNegative = false;
-		bool inParenth = false;
-		bool expNeg = false;
-
-
-	};
-
-void resetVals(VALUES &vals) {
-		vals.curNums = "0";
-		vals.curExp = "1";
-		vals.theLetter = ' ';
-		vals.letterMade = false;
-		vals.ch = ' ';
-		vals.completedCoe = false;
-		vals.completedExp = false;
-		vals.startExp = false;
-		vals.isNegative = false;
-		vals.inParenth = false;
-		vals.expNeg = false;
-	}
-
-void storeCur(string curNums, string curExp, char theLetter, bool isNegative, bool expNeg, Polynomial P) {
+void storeCur(string curNums, string curExp, char theLetter, bool isNegative, bool expNeg, Polynomial &P) {
 	//can make letter optional
 	int  storeNum;
 	istringstream(curNums) >> storeNum;
@@ -186,6 +181,15 @@ void storeCur(string curNums, string curExp, char theLetter, bool isNegative, bo
 	return;
 
 }
+
+
+
+
+
+
+
+
+
 
 istream& operator >>(istream &cin, Polynomial& P) {
 		string thePoly;
@@ -318,7 +322,7 @@ istream& operator >>(istream &cin, Polynomial& P) {
 
 
 		}
-
+		//P.simplify();
 		return cin;
 	}
 
