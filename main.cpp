@@ -2,13 +2,7 @@
 #include <List>
 #include "Term.h"
 #include <sstream>
-//DID IT WORK??????????!!!!!!!!!
-//does it work
-//
-//
-//
-//
-//
+
 using namespace std;
 
 void storeCur(string curNums, string curExp, char theLetter, bool isNegative, bool expNeg, list<Term> &theList) {
@@ -71,14 +65,7 @@ void resetVals(VALUES &vals) {
 
 ///make this return a list?
 Term readInPoly(std::string theString, std::list<Term> &theList) {
-	//std::stringstream ss;
-	//ss << theString;
-	//
-
-	//std::string::iterator iter = theString.begin();
-	//while (iter != theString.end()) {
-
-	//}
+	
 	theString += "+";
 
 	
@@ -116,13 +103,9 @@ Term readInPoly(std::string theString, std::list<Term> &theList) {
 
 		if (vals.ch == ')') {
 			vals.inParenth = false;
-			//storeCur(curNums, curExp, theLetter, isNegative, theList);
+			
 		}
-		//////////////////////
-
-
-		//// collecting non exponent nums
-
+		
 		if (isdigit(vals.ch) && !vals.startExp) {
 			vals.curNums += vals.ch;
 		}
@@ -158,19 +141,7 @@ Term readInPoly(std::string theString, std::list<Term> &theList) {
 			vals.isNegative = true;
 			continue;
 		}
-
-		/*if (ch == '+' && startExp && !inParenth) {
-			storeCur(curNums, curExp, theLetter, isNegative, theList);
-			continue;
-		}
-
-		if (ch == '-' && startExp && !inParenth) {
-			storeCur(curNums, curExp, theLetter, isNegative, theList);
-			isNegative = true;
-			continue;
-		}*/
-
-
+		
 
 		//// encountering a letter
 		if (isalpha(vals.ch)) {
@@ -262,20 +233,14 @@ int main()
 //	cout << (term3 > term4) << endl;
 //	cout << (term3 == term4) << endl;
 //	cout << (term3 < term4) << endl;
-//*/
-
-	
+//*/	
 	//	cout << ch == str[i] << endl;
+	
 	std::string str = "1+2x-3x^2";
 
 	list<Term> theList;
 	readInPoly(str, theList);
 
-	//std::list<Term>::iterator iter;
-	//for (iter = theList.begin(); iter != theList.end(); ++iter) {
-	//	//cout << *iter.getCoefficient() << endl;
-	//	//*iter;
-	//}
 	bool firstEntry = true;
 	string sign = "";
 	if (theList.front().getCoefficient() < 0)
@@ -294,10 +259,7 @@ int main()
 		}
 		firstEntry = false;
 
-		//bool hasCoe = true;
-		//bool hasExp = true;
-		//bool hasLetter = true;
-
+		
 		//add zero exception?
 		//GET SIGN FOR EXPONENTS
 		if (curTermCoe != 0)

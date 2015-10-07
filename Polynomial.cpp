@@ -1,5 +1,7 @@
 #include "Polynomial.h"
+#include <iostream>
 
+using namespace std;
 //adds a term to the polynomial
 void Polynomial::addTerm(Term termToAdd)
 {
@@ -58,3 +60,70 @@ void Polynomial::simplify()
 	}
 
 }
+
+	void Polynomial::operator +(Polynomial rhs) {
+		if (rhs.polyList.size() < 1) {
+			//cout << "there are no items in the second polynomial" << endl;
+		}
+		else {
+			list<Term>::iterator iter = rhs.polyList.begin();
+			for (iter; iter != rhs.polyList.end(); iter++) {
+				addTerm(*iter);
+			}
+			simplify();
+		}
+		
+}
+
+	//const issue passing P
+	ostream& operator <<(ostream& cout,  Polynomial& P){
+		if (P.polyList.size() < 1) {
+			cout << "No terms in given polynomial." << endl;
+			return cout; 
+		}
+		list<Term>::iterator iter = P.polyList.begin();
+	
+		bool firstEntry = true;
+		string sign = "";
+		
+		if (iter->getCoefficient() < 0)
+			string sign = "-";
+
+		for (iter; iter != P.polyList.end(); iter++) {
+			Term cur = *iter;
+			int curCoe = cur.getCoefficient();
+			int curExp = cur.getExponent();
+			char curLetter = cur.getLetter();
+
+			if (curCoe >= 0 && firstEntry == false)
+				sign = "+";
+
+			else if (curCoe < 0 && firstEntry == false)
+				sign = "";
+
+			firstEntry = false;
+
+			if (curCoe != 0)
+				cout << sign << curCoe;
+			if (curLetter != ' ') 
+				cout << curLetter;
+			if (curExp != 1)
+				cout << "^(" << curExp << ")";
+			
+		}
+
+		return cout;
+	}
+
+
+
+		//add zero exception?
+		//GET SIGN FOR EXPONENTS
+		if (curTermCoe != 0)
+			cout << sign << curTermCoe;
+		if (theLetter != ' ')
+			cout << theLetter;
+		if (curTermExp != 1)
+			cout << "^(" << curTermExp << ")";
+
+		//cout << theList.front().getCoefficient() << theList.front().getLetter() << "^(" << theList.front().getExponent() << ")" << endl;
