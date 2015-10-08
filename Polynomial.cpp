@@ -3,8 +3,9 @@
 
 
 using namespace std;
-//adds a term to the polynomial
 
+//this struct is used for status management
+//there were many conditionals, you can find the proper syntax we use in our report
 struct VALUES {
 
 
@@ -24,6 +25,8 @@ struct VALUES {
 
 };
 
+
+//called after a Term is inserted into the list
 void resetVals(VALUES &vals) {
 	vals.curNums = "0";
 	vals.curExp = "1";
@@ -98,19 +101,20 @@ void Polynomial::simplify()
 
 }
 
-//make const???????
+//used to concatenate two polynomials then simplify, sort, and reverse for proper formatting
 Polynomial Polynomial::operator +(Polynomial rhs) {
 	Polynomial finalPoly;
-	finalPoly.polyList = polyList;
+	finalPoly.polyList = polyList; //links current list to the return poly
 		if (rhs.polyList.size() < 1) {
 			cout << "there are no items in the second polynomial" << endl;
 		}
 		else {
-			list<Term>::iterator iter = rhs.polyList.begin();
+			
+			list<Term>::iterator iter = rhs.polyList.begin(); //adds the second iteratively
 			for (iter; iter != rhs.polyList.end(); iter++) {
 				finalPoly.addTerm(*iter);
 			}
-	//		finalPoly.simplify();
+
 		}
 		finalPoly.simplify();
 		finalPoly.polyList.sort();
@@ -120,18 +124,22 @@ Polynomial Polynomial::operator +(Polynomial rhs) {
 
 
 
-
-
-	//const issue passing P
 ostream& operator <<(ostream& cout,  Polynomial& P){
-		if (P.polyList.size() < 1) {
+	//returns ostream with just the polynomial
+		if (P.polyList.size() < 1) { //no elements
 			cout << "No terms in given polynomial." << endl;
 			return cout; 
 		}
+
+		if (P.polyList.size() == 1 && P.polyList.front().getCoefficient() == 0) {
+			cout << "0";  //i used this because the return val was blank otherwise
+			return cout;
+		}
+
 		list<Term>::iterator iter = P.polyList.begin();
 	
 		bool firstEntry = true;
-		string sign = "";
+		string sign = ""; //makes sure there is no plus sign in front of poly (user friendly)
 		
 		if (iter->getCoefficient() < 0)
 			string sign = "-";
@@ -141,7 +149,7 @@ ostream& operator <<(ostream& cout,  Polynomial& P){
 			int curCoe = cur.getCoefficient();
 			int curExp = cur.getExponent();
 			char curLetter = cur.getLetter();
-
+			//all terms are seperated by their + or - before and after them
 			if (curCoe >= 0 && firstEntry == false)
 				sign = "+";
 
@@ -167,9 +175,8 @@ ostream& operator <<(ostream& cout,  Polynomial& P){
 
 
 void storeCur(string curNums, string curExp, char theLetter, bool isNegative, bool expNeg, Polynomial &P) {
-	//can make letter optional
 	int  storeNum;
-	istringstream(curNums) >> storeNum;
+	istringstream(curNums) >> storeNum; //converts string into int
 	if (isNegative) {
 		storeNum *= -1;
 	}
@@ -198,11 +205,11 @@ void storeCur(string curNums, string curExp, char theLetter, bool isNegative, bo
 //2x+3^4-(-4)x^(-20)
 
 istream& operator >>(istream &cin, Polynomial& P) {
-		string thePoly;
+		string thePoly; //reads in string first
 		cin >> thePoly;
 		thePoly += "+";
 
-		VALUES vals;
+		VALUES vals; //inits the status struct
 
 		for (int i = 0; i < thePoly.size(); i++) {
 
@@ -210,7 +217,7 @@ istream& operator >>(istream &cin, Polynomial& P) {
 
 
 			//for non exponent parenthesis (negative vals)
-			//////////////////////////
+	
 			if (vals.ch == '(' && !vals.inExp) {
 				vals.inParenth = true;
 				vals.curNums = "";
@@ -227,7 +234,7 @@ istream& operator >>(istream &cin, Polynomial& P) {
 				continue;
 			}
 
-			if (vals.ch == ')') {
+			if (vals.ch == ')') { //is end of having negative number 
 				vals.inParenth = false;
 				if (vals.inExp) {
 					storeCur(vals.curNums, vals.curExp, vals.theLetter, vals.isNegative, vals.expNeg, P);
@@ -242,8 +249,7 @@ istream& operator >>(istream &cin, Polynomial& P) {
 
 			}
 
-			/////HERE JARREN
-			///SYNTAX FOR INPUT   2x^(-5)
+			//is a number out of exponent
 			if (isdigit(vals.ch) && !vals.startExp) {
 				vals.curNums += vals.ch;
 			}
@@ -285,7 +291,6 @@ istream& operator >>(istream &cin, Polynomial& P) {
 			if (isalpha(vals.ch)) {
 				if (vals.ch != vals.theLetter && vals.letterMade) {
 					//throw too many variables error
-					//!!!!!!!!!!!!!!!!!!!!!!!
 				}
 				vals.theLetter = vals.ch;
 				
@@ -310,7 +315,7 @@ istream& operator >>(istream &cin, Polynomial& P) {
 
 			///// encountering a '^'
 
-			//////////HERE JARREN!!!!
+
 			if (vals.ch == '^') {
 				vals.inExp = true;
 				vals.curExp = "0";
@@ -339,12 +344,6 @@ istream& operator >>(istream &cin, Polynomial& P) {
 				vals.curExp += vals.ch;
 				continue;
 			}
-
-
-
-			//2x+2x+2x^3+2x^3+2x^(-3)-1x^(-3)
-
-
 
 
 		}

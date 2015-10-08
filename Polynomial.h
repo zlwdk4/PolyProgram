@@ -11,7 +11,6 @@ class Polynomial
 
 public:
 	//operator +
-	//const?
 
 	Polynomial  operator +(Polynomial rhs);
 	//operator =
