@@ -112,7 +112,9 @@ Polynomial Polynomial::operator +(Polynomial rhs) {
 			}
 	//		finalPoly.simplify();
 		}
-		
+		finalPoly.simplify();
+		finalPoly.polyList.sort();
+		finalPoly.polyList.reverse();
 		return finalPoly;
 }
 
@@ -340,7 +342,7 @@ istream& operator >>(istream &cin, Polynomial& P) {
 
 
 
-			//2x+2x+2x^3+2x^3+2x(-3)-1x(-3)
+			//2x+2x+2x^3+2x^3+2x^(-3)-1x^(-3)
 
 
 
@@ -349,8 +351,8 @@ istream& operator >>(istream &cin, Polynomial& P) {
 
 
 		P.simplify();
-		/*P.polyList.sort();
-		P.polyList.reverse();*/
+		P.polyList.sort();
+		P.polyList.reverse();
 		return cin;
 	}
 
