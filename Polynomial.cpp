@@ -192,6 +192,8 @@ void storeCur(string curNums, string curExp, char theLetter, bool isNegative, bo
 
 
 
+//syntax example
+//2x+3^4-(-4)x^(-20)
 
 istream& operator >>(istream &cin, Polynomial& P) {
 		string thePoly;
@@ -202,12 +204,9 @@ istream& operator >>(istream &cin, Polynomial& P) {
 
 		for (int i = 0; i < thePoly.size(); i++) {
 
-
-			if (isdigit(vals.ch) && vals.inExp) {
-				vals.curExp += vals.ch;
-			}
-
 			vals.ch = thePoly[i];
+
+
 			//for non exponent parenthesis (negative vals)
 			//////////////////////////
 			if (vals.ch == '(' && !vals.inExp) {
@@ -228,6 +227,16 @@ istream& operator >>(istream &cin, Polynomial& P) {
 
 			if (vals.ch == ')') {
 				vals.inParenth = false;
+				if (vals.inExp) {
+					storeCur(vals.curNums, vals.curExp, vals.theLetter, vals.isNegative, vals.expNeg, P);
+					resetVals(vals);
+					if (thePoly[i + 1] = '-') {
+						vals.isNegative = true;
+					}
+					i++;
+					continue;
+
+				}
 
 			}
 
@@ -261,7 +270,7 @@ istream& operator >>(istream &cin, Polynomial& P) {
 				//throw incorrect format exception
 			}
 
-			if (vals.ch == '-' && !vals.inParenth) {
+			if (vals.ch == '-' && !vals.inParenth && !vals.inExp) {
 				storeCur(vals.curNums, vals.curExp, vals.theLetter, vals.isNegative, vals.expNeg, P);
 				//reset all vals
 				resetVals(vals);
@@ -303,6 +312,7 @@ istream& operator >>(istream &cin, Polynomial& P) {
 				}
 				//assumes no variables in the exponent
 				if (thePoly[i + 1] == '(' && thePoly[i + 2] == '-'  && isdigit(thePoly[i + 3])) {
+					vals.startExp = true;
 					
 					vals.expNeg = true;
 					continue;
