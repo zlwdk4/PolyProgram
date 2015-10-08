@@ -230,7 +230,7 @@ istream& operator >>(istream &cin, Polynomial& P) {
 				if (vals.inExp) {
 					storeCur(vals.curNums, vals.curExp, vals.theLetter, vals.isNegative, vals.expNeg, P);
 					resetVals(vals);
-					if (thePoly[i + 1] = '-') {
+					if (thePoly[i + 1] == '-') {
 						vals.isNegative = true;
 					}
 					i++;
@@ -341,9 +341,11 @@ istream& operator >>(istream &cin, Polynomial& P) {
 
 
 		}
+
+
 		P.simplify();
-		P.polyList.sort();
-		P.polyList.reverse();
+		/*P.polyList.sort();
+		P.polyList.reverse();*/
 		return cin;
 	}
 
