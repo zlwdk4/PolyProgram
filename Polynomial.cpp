@@ -341,7 +341,9 @@ istream& operator >>(istream &cin, Polynomial& P) {
 
 
 		}
-		//P.simplify();
+		P.simplify();
+		P.polyList.sort();
+		P.polyList.reverse();
 		return cin;
 	}
 
