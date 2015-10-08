@@ -1,7 +1,6 @@
 #include "UserInterface.h"
 
 
-
 Polynomial getPoly()
 {
 	Polynomial input;
@@ -39,6 +38,8 @@ void UserInterface::displayMenu()
 			finalPoly = poly1 + poly2;
 			cout << finalPoly << endl;
 		}
+		if (input != '1' || input != '2' || input != '3')
+			displayMenu();
 	} while (input != '3');
 }
 
