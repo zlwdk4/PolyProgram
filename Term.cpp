@@ -27,18 +27,20 @@ Term::Term(int coe, int exp, char theLetter) {
 //
 //}
 
-
 bool Term::operator < (Term rhs)
 {
+	//if the lhs exponent is less than the rhs, then we know the lhs term is less than the rhs term
 	if (exponent < rhs.exponent)
 		return true;
+	//if the lhs exponent is equal to the exponent of the rhs and the coefficient of the lhs is less than the coefficient
+	//of the rhs, then we know that the lhs term is smaller.
 	if (exponent == rhs.exponent && coefficient < rhs.coefficient)
 		return true;
-
+	//other wise the rhs side is smaller
 	return false;
 
 }
-
+//same logic as the < operator
 bool Term::operator > (Term rhs)
 {
 	if (exponent > rhs.exponent)
@@ -52,9 +54,10 @@ bool Term::operator > (Term rhs)
 
 bool Term::operator == (Term rhs)
 {
-
+	//if the lhs not less than the rhs and the rhs is not less than the rhs, then we know they they are equal
 	if (!(*this < rhs) && !(*this > rhs))
 		return true;
+	//otherwise they are not equal
 	else return false;
 }
 
