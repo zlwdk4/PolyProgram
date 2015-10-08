@@ -25,7 +25,7 @@ void UserInterface::displayMenu()
 			Polynomial polyInput;
 			cout << "Please enter the polynomial" << endl;
 			cin >> polyInput;
-			cout << polyInput;
+			cout << "Your polynomial: " << polyInput << endl;
 		}
 		//if the user enters 2, then they will be asked for two polynomials. Then the polynomials will be added together and will be displayed
 		if (input == '2')
@@ -36,7 +36,7 @@ void UserInterface::displayMenu()
 			Polynomial poly2 = getPoly();
 			Polynomial finalPoly;
 			finalPoly = poly1 + poly2;
-			cout << finalPoly << endl;
+			cout << "Your polynomial: " << finalPoly << endl;
 		}
 		if (input != '1' || input != '2' || input != '3')
 			displayMenu();
