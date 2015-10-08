@@ -54,7 +54,7 @@ bool Term::operator > (Term rhs)
 
 bool Term::operator == (Term rhs)
 {
-	//if the lhs not less than the rhs and the rhs is not less than the rhs, then we know they they are equal
+	//if the lhs is not less than the rhs and the rhs is not less than the lhs, then we know they they are equal
 	if (!(*this < rhs) && !(*this > rhs))
 		return true;
 	//otherwise they are not equal
