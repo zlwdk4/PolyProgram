@@ -19,6 +19,7 @@ struct VALUES {
 	bool isNegative = false;
 	bool inParenth = false;
 	bool expNeg = false;
+	bool inExp = false;
 
 
 };
@@ -35,6 +36,7 @@ void resetVals(VALUES &vals) {
 	vals.isNegative = false;
 	vals.inParenth = false;
 	vals.expNeg = false;
+	vals.inExp = false;
 }
 
 
@@ -201,12 +203,14 @@ istream& operator >>(istream &cin, Polynomial& P) {
 		for (int i = 0; i < thePoly.size(); i++) {
 
 
-
+			if (isdigit(vals.ch) && vals.inExp) {
+				vals.curExp += vals.ch;
+			}
 
 			vals.ch = thePoly[i];
 			//for non exponent parenthesis (negative vals)
 			//////////////////////////
-			if (vals.ch == '(') {
+			if (vals.ch == '(' && !vals.inExp) {
 				vals.inParenth = true;
 				vals.curNums = "";
 				if (thePoly[i + 1] == '-') {
@@ -227,6 +231,8 @@ istream& operator >>(istream &cin, Polynomial& P) {
 
 			}
 
+			/////HERE JARREN
+			///SYNTAX FOR INPUT   2x^(-5)
 			if (isdigit(vals.ch) && !vals.startExp) {
 				vals.curNums += vals.ch;
 			}
@@ -236,7 +242,7 @@ istream& operator >>(istream &cin, Polynomial& P) {
 
 
 			/// encountering a  + or -
-			if (vals.ch == '+' || vals.ch == '-' && !vals.inParenth) {
+			if (vals.ch == '+' || vals.ch == '-' && !vals.inParenth && !vals.startExp) {
 				if ((i < thePoly.size() && isalnum(thePoly[i + 1]) ||
 					(i < thePoly.size() && thePoly[i + 1] == '(') &&
 					(i > 0 && thePoly[i - 1] != '(') ||
@@ -288,13 +294,16 @@ istream& operator >>(istream &cin, Polynomial& P) {
 
 			///// encountering a '^'
 
+			//////////HERE JARREN!!!!
 			if (vals.ch == '^') {
+				vals.inExp = true;
 				vals.curExp = "0";
 				if (!isalpha(thePoly[i - 1])) {
 					//throw incorrect format exception
 				}
 				//assumes no variables in the exponent
 				if (thePoly[i + 1] == '(' && thePoly[i + 2] == '-'  && isdigit(thePoly[i + 3])) {
+					
 					vals.expNeg = true;
 					continue;
 				}
