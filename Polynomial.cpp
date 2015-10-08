@@ -286,6 +286,11 @@ istream& operator >>(istream &cin, Polynomial& P) {
 					//!!!!!!!!!!!!!!!!!!!!!!!
 				}
 				vals.theLetter = vals.ch;
+				
+				if (vals.curNums == "0") {
+					vals.curNums = "1";
+				}
+
 				vals.letterMade = true;
 
 				if ((i < thePoly.size()) && (thePoly[i + 1] == '+' || thePoly[i + 1] == '-' || thePoly[i + 1] == '^')) {
@@ -335,7 +340,7 @@ istream& operator >>(istream &cin, Polynomial& P) {
 
 
 
-
+			//2x+2x+2x^3+2x^3+2x(-3)-1x(-3)
 
 
 
